@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: dev
+
+server:
+  port: 8080
+
+mybatis:
+  mapper-locations: classpath*:mappings/*.xml
+  type-aliases-package: com.chenzy.demo.web.pojo
+
+#日志
+logging:
+  level:
+    com.example.demo.web.dao: debug
+    org:
+      springframework:
+        boot:
+          autoconfigure: ERROR
+#日志文件输出路径
+#  file:
+#    assets.log
