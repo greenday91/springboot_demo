@@ -1,28 +1,22 @@
 package com.example.demo.web.entity;
 
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import io.swagger.annotations.ApiParam;
 
 import java.io.Serializable;
 import java.util.Date;
 
 @ApiModel
-public class Article implements Serializable {
-
+public class SysUser implements Serializable {
 
     @ApiModelProperty("id")
     private String id;
 
-    @ApiModelProperty("title")
-    private String title;
+    @ApiModelProperty("userName")
+    private String userName;
 
-    @ApiModelProperty("content")
-    private String content;
-
-    @ApiModelProperty("autr")
-    private String autr;
+    @ApiModelProperty("passWord")
+    private String passWord;
 
     @ApiModelProperty("createDate")
     private Date createDate;
@@ -30,11 +24,12 @@ public class Article implements Serializable {
     @ApiModelProperty("createBy")
     private String createBy;
 
-    @ApiModelProperty("updateTime")
-    private Date updateTime;
+    @ApiModelProperty("updateDate")
+    private Date updateDate;
 
     @ApiModelProperty("updateBy")
     private String updateBy;
+
 
     public String getId() {
         return id;
@@ -44,28 +39,20 @@ public class Article implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getContent() {
-        return content;
+    public String getPassWord() {
+        return passWord;
     }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getAutr() {
-        return autr;
-    }
-
-    public void setAutr(String autr) {
-        this.autr = autr;
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
     }
 
     public Date getCreateDate() {
@@ -84,12 +71,12 @@ public class Article implements Serializable {
         this.createBy = createBy;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 
     public String getUpdateBy() {

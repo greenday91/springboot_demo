@@ -3,13 +3,13 @@ spring:
     active: dev
 
 server:
-  port: 8080
+  port: 8089
 
 mybatis:
   mapper-locations: classpath*:mappings/*.xml
   type-aliases-package: com.chenzy.demo.web.pojo
 
-#ÈÕÖ¾
+#ï¿½ï¿½Ö¾
 logging:
   level:
     com.example.demo.web.dao: debug
@@ -17,6 +17,6 @@ logging:
       springframework:
         boot:
           autoconfigure: ERROR
-#ÈÕÖ¾ÎÄ¼þÊä³öÂ·¾¶
+#ï¿½ï¿½Ö¾ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
 #  file:
 #    assets.log

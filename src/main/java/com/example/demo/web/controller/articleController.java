@@ -1,10 +1,12 @@
 package com.example.demo.web.controller;
 
-import com.example.demo.config.RabbitConfiguration;
+
 import com.example.demo.web.entity.Article;
 import com.example.demo.web.service.ArticleService;
 import com.example.demo.web.uitl.RedisUtil;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ import java.util.Date;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("/article")
+@Api
 public class articleController {
 
     @Autowired
@@ -29,7 +33,8 @@ public class articleController {
     private RabbitTemplate rabbitTemplate;
 
 
-    @RequestMapping(value = "/getById/{id}")
+    @ApiOperation("根据id获取文章")
+    @RequestMapping(value = "/getById/{id}",method = {RequestMethod.GET})
     public Object getArticleById(@PathVariable("id") String id){
         if(redisUtil.hasKey(id)){
             return redisUtil.get(id);
@@ -44,6 +49,7 @@ public class articleController {
         return articler;
     }
 
+    @ApiOperation("添加文章")
     @RequestMapping(value = "/addArticle",method = RequestMethod.POST)
     public Object getArticleById(@RequestBody Article article){
         article.setId(UUID.randomUUID().toString());
@@ -54,7 +60,8 @@ public class articleController {
     }
 
 
-    @RequestMapping(value = "/sendMessage")
+    @ApiOperation("发送消息到队列")
+    @RequestMapping(value = "/sendMessage",method = {RequestMethod.POST})
     public Object sendTestMessage(@RequestParam("message") String message){
         rabbitTemplate.convertAndSend("direct",message);
         return "";
