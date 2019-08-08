@@ -18,10 +18,10 @@ spring:
       name: spring-boot-redis
   rabbitmq:
     host: 47.99.57.25
-    port: 15672
+    port: 5672 #不是15672。客户端就是5672
     username: chenzy88
     password: chenzy88
-    virtual-host: /testmq
+    virtual-host: chenzydev
     listener:
       simple:
         #acknowledge-mode: manual #设置确认模式手工确认

@@ -1,9 +1,12 @@
 package com.example.demo.web.controller;
 
+import com.example.demo.config.RabbitConfiguration;
 import com.example.demo.web.entity.Article;
 import com.example.demo.web.service.ArticleService;
 import com.example.demo.web.uitl.RedisUtil;
 
+import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +22,12 @@ public class articleController {
     @Autowired
     private RedisUtil redisUtil;
 
+    @Autowired
+    private AmqpTemplate amqpTemplate;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
+
 
     @RequestMapping(value = "/getById/{id}")
     public Object getArticleById(@PathVariable("id") String id){
@@ -29,6 +38,7 @@ public class articleController {
         if(null == articler){
             redisUtil.set(id,articler);
         }else{
+            amqpTemplate.convertAndSend("helloQueue",articler);
             redisUtil.set(id,articler);
         }
         return articler;
@@ -41,6 +51,13 @@ public class articleController {
         article.setUpdateTime(new Date());
         articleService.addArticle(article);
         return "ok";
+    }
+
+
+    @RequestMapping(value = "/sendMessage")
+    public Object sendTestMessage(@RequestParam("message") String message){
+        rabbitTemplate.convertAndSend("direct",message);
+        return "";
     }
 
 
