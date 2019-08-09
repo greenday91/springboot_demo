@@ -9,14 +9,13 @@ mybatis:
   mapper-locations: classpath*:mappings/*.xml
   type-aliases-package: com.chenzy.demo.web.pojo
 
-#��־
+
 logging:
   level:
-    com.example.demo.web.dao: debug
+    com.example.demo.web.demo: debug
+    com.example.demo.config: debug
     org:
       springframework:
         boot:
           autoconfigure: ERROR
-#��־�ļ����·��
-#  file:
-#    assets.log
+  file: article.log
