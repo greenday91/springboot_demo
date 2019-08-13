@@ -12,9 +12,9 @@
 		  id,
 		  username,
      	  password,
-     	  createDate,
+     	  createdate,
           createby,
-          updatetime,
+          updatedate,
           updateby
 		)
 		values
@@ -24,7 +24,7 @@
 		#{passWord},
 		#{createDate},
 		#{createBy},
-		#{updateTime},
+		#{updateDate},
 		#{updateBy}
 		)
 	</insert>

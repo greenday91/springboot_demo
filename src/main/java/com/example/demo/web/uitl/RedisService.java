@@ -12,7 +12,7 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 
 @Component
-public class RedisUtil {
+public class RedisService {
     @Resource
     private RedisTemplate<String, Object> redisTemplate;
 

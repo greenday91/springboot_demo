@@ -3,8 +3,8 @@ package com.example.demo.web.controller;
 
 import com.example.demo.web.entity.Article;
 import com.example.demo.web.service.ArticleService;
-import com.example.demo.web.uitl.RedisUtil;
 
+import com.example.demo.web.uitl.RedisService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -24,7 +24,7 @@ public class articleController {
     private ArticleService articleService;
 
     @Autowired
-    private RedisUtil redisUtil;
+    private RedisService redisUtil;
 
     @Autowired
     private AmqpTemplate amqpTemplate;
