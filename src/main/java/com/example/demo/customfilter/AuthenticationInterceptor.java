@@ -65,7 +65,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                 }
                 SysUser sysUser = (SysUser) redisService.get(userId);
                 if (null == sysUser) {
-                    throw new RuntimeException("用户不存在，请重新登录");
+                    throw new RuntimeException("token无效，请重新登录");
                 }
                 // 验证 token
                 JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(sysUser.getPassWord())).build();

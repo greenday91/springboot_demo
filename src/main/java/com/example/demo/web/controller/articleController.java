@@ -1,14 +1,13 @@
 package com.example.demo.web.controller;
 
 
+import com.example.demo.annotation.VerificationUserToken;
 import com.example.demo.web.entity.Article;
+import com.example.demo.web.model.request.ArticelRequest;
 import com.example.demo.web.service.ArticleService;
 
-import com.example.demo.web.uitl.RedisService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.amqp.core.AmqpTemplate;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,50 +22,33 @@ public class articleController {
     @Autowired
     private ArticleService articleService;
 
-    @Autowired
-    private RedisService redisUtil;
 
-    @Autowired
-    private AmqpTemplate amqpTemplate;
-
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
-
-
-    @ApiOperation("根据id获取文章")
-    @RequestMapping(value = "/getById/{id}",method = {RequestMethod.GET})
-    public Object getArticleById(@PathVariable("id") String id){
-        if(redisUtil.hasKey(id)){
-            return redisUtil.get(id);
-        }
-        Article articler = articleService.getById(id);
-        if(null == articler){
-            redisUtil.set(id,articler);
-        }else{
-            amqpTemplate.convertAndSend("helloQueue",articler);
-            redisUtil.set(id,articler);
-        }
-        return articler;
-    }
-
+    @VerificationUserToken
     @ApiOperation("添加文章")
     @RequestMapping(value = "/addArticle",method = RequestMethod.POST)
     public Object getArticleById(@RequestBody Article article){
         article.setId(UUID.randomUUID().toString());
-        article.setCreateDate(new Date());
-        article.setUpdateTime(new Date());
+        article.setCreatedate(new Date());
+        article.setUpdatetime(new Date());
         articleService.addArticle(article);
         return "ok";
     }
 
 
-    @ApiOperation("发送消息到队列")
-    @RequestMapping(value = "/sendMessage",method = {RequestMethod.POST})
-    public Object sendTestMessage(@RequestParam("message") String message){
-        rabbitTemplate.convertAndSend("direct",message);
-        return "";
+    @VerificationUserToken
+    @ApiOperation("根据id获取文章")
+    @RequestMapping(value = "/findArticleById/{id}",method = RequestMethod.POST)
+    public Object findArticleById(@PathVariable String id){
+        Article article = new Article();
+        article.setId(id);
+        return  articleService.findById(article);
     }
 
+    @ApiOperation("条件查询")
+    @RequestMapping(value = "/findByTime",method = RequestMethod.POST)
+    public Object findArticleById(@RequestBody ArticelRequest articelRequest){
+        return  articleService.findByStartAndEndTime(articelRequest);
+    }
 
 
 }

@@ -23,7 +23,7 @@ mybatis-plus:
 
   configuration:
     #使用驼峰法映射属性,配置这个resultType可以映射
-    map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: false
   global-config:
     db-config:
       # 配置表明前缀，例如表设计时表名为tb_manager，对应entity为Manager
@@ -37,7 +37,7 @@ mybatis-plus:
 
 logging:
   level:
-    com.example.demo.web.demo: debug
+    com.example.demo.web: debug
     com.example.demo.config: debug
     org:
       springframework:

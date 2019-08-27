@@ -2,6 +2,7 @@ package com.example.demo.web.controller;
 
 import com.example.demo.annotation.PassToken;
 import com.example.demo.annotation.VerificationUserToken;
+import com.example.demo.model.RestResponse;
 import com.example.demo.web.entity.SysUser;
 import com.example.demo.web.service.SysUserService;
 import com.example.demo.web.uitl.ResponseBean;
@@ -23,8 +24,7 @@ public class userController {
     public Object loginSys(@RequestParam("name") String name,
                            @RequestParam("password") String password){
         String data = sysUserService.generateToken(name,password);
-        ResponseBean responseBean = new ResponseBean(200,"请求成功",data);
-        return responseBean;
+        return RestResponse.success(data);
     }
 
 
@@ -34,7 +34,7 @@ public class userController {
     @RequestMapping(value = "/addUser",method = RequestMethod.POST)
     public Object addUser(@RequestBody SysUser sysUser){
         sysUserService.insertSysUser(sysUser);
-        return "sessucs";
+        return RestResponse.success();
     }
 
 
