@@ -1,6 +1,7 @@
 package com.example.demo.web.controller;
 
 
+import com.example.demo.annotation.SecurityParameter;
 import com.example.demo.annotation.VerificationUserToken;
 import com.example.demo.web.entity.Article;
 import com.example.demo.web.model.request.ArticelRequest;
@@ -36,6 +37,7 @@ public class articleController {
 
 
     @VerificationUserToken
+    @SecurityParameter
     @ApiOperation("根据id获取文章")
     @RequestMapping(value = "/findArticleById/{id}",method = RequestMethod.POST)
     public Object findArticleById(@PathVariable String id){
