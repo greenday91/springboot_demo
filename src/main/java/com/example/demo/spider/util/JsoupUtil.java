@@ -17,7 +17,7 @@ public class JsoupUtil {
 
     static {
         jsoupHeader = new HashMap<>();
-        jsoupHeader.put("Host", "http://info.bet007.com");
+        jsoupHeader.put("Host", "http://www.baidu.com");
         jsoupHeader.put("User-Agent", "  Mozilla/5.0 (Windows NT 6.1; WOW64; rv:5.0) Gecko/20100101 Firefox/5.0");
         jsoupHeader.put("Accept", "  text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         jsoupHeader.put("Accept-Language", "zh-cn,zh;q=0.5");
@@ -51,8 +51,14 @@ public class JsoupUtil {
                 "&showCol%5B%5D=dri&showCol%5B%5D=def&showCol%5B%5D=phy";
 
         Document document = JsoupUtil.getDocument(url,20000);
-        Elements elements = document.getElementsByTag("table");
-        System.out.println(elements);
+        Elements elements = document.getElementsByTag("tr");
+
+        for(Element e:elements){
+            System.out.println(e.getElementsByTag("td").size());
+        }
+//        for(Element e:elements){
+//        }
+
 //            e.getElementsByClass("col col-hi").text();
 //            e.getElementsByClass("col col-wi").text();
 //            e.getElementsByClass("col col-pf").text();
